@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>咪咪虾条的后花园</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #eef2f5 0%, #d9e4f0 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            overflow-x: hidden;
+        }
+        
+        body::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(0, 0, 0, 0.02),
+                rgba(0, 0, 0, 0.02) 1px,
+                transparent 1px,
+                transparent 6px
+            );
+            z-index: -1;
+            pointer-events: none;
+        }
+        
+        .decoration {
+            position: absolute;
+            z-index: -1;
+            opacity: 0.05;
+            pointer-events: none;
+            font-size: 8rem;
+            color: #2c3e50;
+        }
+        
+        .dec-1 {
+            top: 5%;
+            left: 5%;
+            transform: rotate(-15deg);
+        }
+        
+        .dec-2 {
+            top: 15%;
+            right: 7%;
+            transform: rotate(25deg);
+        }
+        
+        .dec-3 {
+            bottom: 15%;
+            left: 8%;
+            transform: rotate(15deg);
+        }
+        
+        .dec-4 {
+            bottom: 10%;
+            right: 6%;
+            transform: rotate(-45deg);
+        }
+        
+        .header {
+            text-align: center;
+            margin: 0 0 40px;
+            max-width: 800px;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+            font-weight: 800;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .header h1::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 150px;
+            height: 6px;
+            background: linear-gradient(to right, #2ecc71, #3498db);
+            border-radius: 4px;
+            box-shadow: 0 3px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .header p {
+            color: rgba(44, 62, 80, 0.85);
+            max-width: 700px;
+            margin: 20px auto 0;
+            font-size: 1.2rem;
+            font-weight: 300;
+            line-height: 1.6;
+        }
+        
+        .container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 20px 0 40px;
+        }
+        
+        .card {
+            background: rgba(255, 255, 255, 0.93);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            transition: all 0.4s ease;
+            cursor: pointer;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: 220px;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(4px);
+        }
+        
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            background: rgba(255, 255, 255, 0.97);
+        }
+        
+        .card:hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 20px;
+            padding: 3px;
+            background: linear-gradient(45deg, #3498db, #2ecc71);
+            -webkit-mask: 
+                linear-gradient(#fff 0 0) content-box, 
+                linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+            pointer-events: none;
+            z-index: -1;
+            animation: gradientRotate 3s linear infinite;
+        }
+        
+        @keyframes gradientRotate {
+            0% {
+                background: linear-gradient(45deg, #3498db, #2ecc71);
+            }
+            25% {
+                background: linear-gradient(135deg, #3498db, #2ecc71);
+            }
+            50% {
+                background: linear-gradient(225deg, #3498db, #2ecc71);
+            }
+            75% {
+                background: linear-gradient(315deg, #3498db, #2ecc71);
+            }
+            100% {
+                background: linear-gradient(45deg, #3498db, #2ecc71);
+            }
+        }
+        
+        .card-content {
+            flex: 1;
+            width: 100%;
+        }
+        
+        .card h2 {
+            color: #2c3e50;
+            margin-bottom: 12px;
+            font-size: 1.6rem;
+            font-weight: 700;
+        }
+        
+        .card p {
+            color: #7f8c8d;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        
+        .card .url {
+            color: #2c3e50;
+            font-size: 0.9rem;
+            font-weight: 600;
+            word-break: break-all;
+            background: rgba(236, 240, 241, 0.8);
+            padding: 8px 12px;
+            border-radius: 6px;
+            display: inline-block;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            border: 1px solid rgba(44, 62, 80, 0.1);
+        }
+        
+        @media (max-width: 900px) {
+            .container {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+            
+            .header h1 {
+                font-size: 2.4rem;
+            }
+            
+            .header p {
+                font-size: 1.1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                grid-template-columns: 1fr;
+                max-width: 600px;
+            }
+            
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .header p {
+                font-size: 1rem;
+            }
+            
+            .decoration {
+                font-size: 6rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 30px 15px;
+            }
+            
+            .header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .header h1::after {
+                width: 120px;
+                height: 5px;
+                bottom: -10px;
+            }
+            
+            .card {
+                padding: 25px;
+                height: 200px;
+            }
+            
+            .decoration {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 装饰元素 -->
+    <div class="decoration dec-1"><i class="fas fa-star"></i></div>
+    <div class="decoration dec-2"><i class="fas fa-heart"></i></div>
+    <div class="decoration dec-3"><i class="fas fa-circle"></i></div>
+    <div class="decoration dec-4"><i class="fas fa-square"></i></div>
+    
+    <div class="header">
+        <h1>咪咪虾条的后花园</h1>
+        <p>个人自用网站，一键直达你需要的资源与服务</p>
+    </div>
+    
+    <div class="container">
+        <!-- Github加速下载 -->
+        <div class="card" onclick="window.open('https://gh.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>Github加速下载</h2>
+                <p>提供Github资源的高速下载服务</p>
+                <div class="url">https://gh.1008008.xyz</div>
+            </div>
+        </div>
+        
+        <!-- 虾条影视 -->
+        <div class="card" onclick="window.open('https://v.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>虾条影视</h2>
+                <p>丰富的影视资源库</p>
+                <div class="url">https://v.1008008.xyz</div>
+            </div>
+        </div>
+        
+        <!-- 视频解析 -->
+        <div class="card" onclick="window.open('https://jx.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>视频解析</h2>
+                <p>多种视频平台的解析服务</p>
+                <div class="url">https://jx.1008008.xyz</div>
+            </div>
+        </div>
+        
+        <!-- 短剧搜索 -->
+        <div class="card" onclick="window.open('https://dj.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>短剧搜索</h2>
+                <p>海量短剧资源一站式搜索</p>
+                <div class="url">https://dj.1008008.xyz</div>
+            </div>
+        </div>
+        
+        <!-- LibreTV -->
+        <div class="card" onclick="window.open('https://tv.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>LibreTV</h2>
+                <p>免费影视资源观看平台</p>
+                <div class="url">https://tv.1008008.xyz</div>
+            </div>
+        </div>
+        
+        <!-- MoonTV -->
+        <div class="card" onclick="window.open('https://tv2.mmxia.site', '_blank')">
+            <div class="card-content">
+                <h2>MoonTV</h2>
+                <p>高清影视观看平台</p>
+                <div class="url">https://tv2.mmxia.site</div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // 添加卡片悬停动画
+        document.querySelectorAll('.card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-12px)';
+            });
+            
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(0)';
+            });
+        });
+        
+        // 添加装饰元素动画
+        const decorations = document.querySelectorAll('.decoration');
+        decorations.forEach((dec, index) => {
+            dec.style.animation = `float${index+1} 8s infinite ease-in-out`;
+            document.styleSheets[0].insertRule(
+                `@keyframes float${index+1} {
+                    0%, 100% { transform: translateY(0) rotate(${index*15}deg); }
+                    50% { transform: translateY(-20px) rotate(${index*15 + 10}deg); }
+                }`, 
+                document.styleSheets[0].cssRules.length
+            );
+        });
+    </script>
+</body>
+</html>
