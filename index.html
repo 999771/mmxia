@@ -116,10 +116,10 @@
         
         .container {
             display: grid;
-            grid-template-columns: repeat(3, minmax(300px, 1fr));
+            grid-template-columns: repeat(4, minmax(300px, 1fr));
             gap: 25px;
             width: 100%;
-            max-width: 1200px;
+            max-width: 1600px;
             margin: 0 auto 20px; 
         }
         
@@ -130,7 +130,7 @@
             padding: 30px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
             transition: all 0.4s ease;
-            cursor: pointer;
+            cursor: default; /* 修改为默认光标，因为卡片本身不再跳转 */
             text-align: center;
             display: flex;
             flex-direction: column;
@@ -190,11 +190,15 @@
         .card-content {
             flex: 1;
             width: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 15px;
         }
         
         .card h2 {
             color: #2c3e50;
-            margin-bottom: 12px;
+            margin-bottom: 5px;
             font-size: 1.6rem;
             font-weight: 700;
         }
@@ -203,7 +207,7 @@
             color: #7f8c8d;
             font-size: 0.95rem;
             line-height: 1.5;
-            margin-bottom: 15px;
+            margin-bottom: 5px;
         }
         
         .card .url {
@@ -211,7 +215,7 @@
             font-size: 0.9rem;
             font-weight: 600;
             word-break: break-all;
-            background: rgba(236, 240, 241, 0.8);
+            background: rgba(236, 240, 241, 0.8); /* 网址背景色 */
             padding: 8px 12px;
             border-radius: 6px;
             display: inline-block;
@@ -220,9 +224,48 @@
             text-decoration: none !important;
         }
         
+        /* 按钮容器 - 用于并排显示按钮 */
+        .btn-container {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+        
+        /* 按钮样式 - 与.url类保持完全一致的样式 */
+        .card-btn {
+            flex: 1; /* 按钮平均分配宽度 */
+            padding: 8px 12px;
+            background: rgba(236, 240, 241, 0.8); /* 与网址背景色相同 */
+            color: #000000; /* 与网址文字颜色相同 */
+            border: 1px solid rgba(44, 62, 80, 0.1); /* 与网址边框样式一致 */
+            border-radius: 6px;
+            font-size: 0.9rem; /* 与网址字体大小相同 */
+            font-weight: 600; /* 与网址字体粗细相同 */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* 与网址字体相同 */
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .card-btn:hover {
+            background: linear-gradient(135deg, #3498db 0%, #2ecc71 100%); /* 悬停时显示渐变 */
+            color: white; /* 悬停时文字变白 */
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            border-color: transparent; /* 悬停时去掉边框 */
+        }
+        
         a, a:hover, a:visited, a:active {
             text-decoration: none;
             color: inherit;
+        }
+        
+        @media (max-width: 1600px) {
+            .container {
+                max-width: 1200px;
+                grid-template-columns: repeat(3, minmax(300px, 1fr));
+            }
         }
         
         @media (max-width: 1200px) {
@@ -243,6 +286,11 @@
             .header p {
                 font-size: 1.1rem;
             }
+            
+            .card-btn {
+                font-size: 0.85rem;
+                padding: 7px 10px;
+            }
         }
         
         @media (max-width: 768px) {
@@ -262,6 +310,11 @@
             .decoration {
                 font-size: 6rem;
             }
+            
+            /* 在中等屏幕下按钮仍保持并排 */
+            .btn-container {
+                flex-direction: row;
+            }
         }
         
         @media (max-width: 480px) {
@@ -280,8 +333,23 @@
             }
             
             .card {
-                padding: 25px;
-                height: 200px;
+                padding: 20px 15px;
+                height: auto;
+                min-height: 220px;
+            }
+            
+            .card h2 {
+                font-size: 1.4rem;
+            }
+            
+            .card-btn {
+                font-size: 0.8rem;
+                padding: 6px 8px;
+            }
+            
+            /* 在小屏幕下按钮垂直排列 */
+            .btn-container {
+                flex-direction: column;
             }
             
             .decoration {
@@ -329,13 +397,25 @@
                 <div class="url">https://jx.1008008.xyz</div>
             </div>
         </div>
+
+        <!-- 漫画搜索 -->
+        <div class="card" onclick="window.open('https://m.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>漫画搜索</h2>
+                <p>海量漫画资源搜索服务</p>
+                <div class="url">https://m.1008008.xyz</div>
+            </div>
+        </div>
         
         <!-- 短剧搜索 -->
-        <div class="card" onclick="window.open('https://dj.1008008.xyz', '_blank')">
+        <div class="card">
             <div class="card-content">
                 <h2>短剧搜索</h2>
-                <p>海量短剧资源一站式搜索</p>
-                <div class="url">https://dj.1008008.xyz</div>
+                <p>不同平台的短剧资源搜索</p>
+                <div class="btn-container">
+                    <button class="card-btn" onclick="window.open('https://dj.1008008.xyz', '_blank')">支持番茄/西瓜/红果</button>
+                    <button class="card-btn" onclick="window.open('https://dj2.1008008.xyz', '_blank')">支持河马/繁华/点众</button>
+                </div>
             </div>
         </div>
         
@@ -354,6 +434,15 @@
                 <h2>MoonTV</h2>
                 <p>高清影视观看平台</p>
                 <div class="url">https://tv2.1008008.xyz</div>
+            </div>
+        </div>
+
+        <!-- 有声小说 -->
+        <div class="card" onclick="window.open('https://t.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>有声小说</h2>
+                <p>丰富的有声小说资源</p>
+                <div class="url">https://t.1008008.xyz</div>
             </div>
         </div>
         
@@ -381,6 +470,15 @@
                 <h2>在线文生图</h2>
                 <p>AI文本生成图片服务</p>
                 <div class="url">https://tu.1008008.xyz</div>
+            </div>
+        </div>
+
+        <!-- Epic免费游戏 -->
+        <div class="card" onclick="window.open('https://g.1008008.xyz', '_blank')">
+            <div class="card-content">
+                <h2>Epic免费游戏</h2>
+                <p>Epic平台免费游戏汇总</p>
+                <div class="url">https://g.1008008.xyz</div>
             </div>
         </div>
     </div>
